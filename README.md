@@ -25,10 +25,18 @@ LIS3DSH_set_scale(&handler_LIS3DSH, LIS3DSH_SCALE_16G);
 
 Data can be read from sensor if two forms, as raw sensor output or as mg unit(1/1000  of earth acceleration). Second way is more computing intensive due to floating point calculations. Checking if acceleration was updated and read it is  done with:
 <pre>
-    if(LIS3DSH_check_for_data(&handler_LIS3DSH))
-    {
-      LIS3DSH_read_acc_mg(&handler_LIS3DSH);
-    }
+/*using LIS3DSH_read_acc_mg also updates raw data*/
+if(LIS3DSH_check_for_data(&handler_LIS3DSH))
+{
+    LIS3DSH_read_acc_mg(&handler_LIS3DSH);
+    /*LIS3DSH_read_acc_raw(&handler_LIS3DSH);*/
+}
+/*
+Output is stored in
+handler_LIS3DSH.acc_mg.X,Y,Z
+or
+handler_LIS3DSH.raw_acc.X,Y,Z
+*/
 </pre>
 
 
